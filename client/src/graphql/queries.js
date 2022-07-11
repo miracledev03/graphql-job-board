@@ -31,9 +31,11 @@ const JOB_DETAIL_FRAGMENT = gql`
   }
 `;
 
-const JOB_QUERY = gql`
+export const JOB_QUERY = gql`
   query JobQuery($id: ID!) {
-    ...JobDetail
+    job(id: $id) {
+      ...JobDetail
+    }
   }
   ${JOB_DETAIL_FRAGMENT}
 `;
@@ -82,16 +84,6 @@ export async function createJob(input) {
       });
     },
   });
-
-  return job;
-}
-
-export async function getJob(id) {
-  const variables = { id };
-
-  const {
-    data: { job },
-  } = await client.query({ query: JOB_QUERY, variables });
 
   return job;
 }
