@@ -29,7 +29,7 @@ export const resolvers = {
       
       return Job.delete(id);
     },
-    updateJob: (_root, { input }, { user }) => {
+    updateJob: async (_root, { input }, { user }) => {
       rejectIf(!user);
 
       const job = await Job.findById(input.id);
