@@ -53,6 +53,19 @@ export const JOBS_QUERY = gql`
   }
 `;
 
+export const COMPANY_QUERY = gql`
+  query CompanyQuery($id: ID!) {
+    company(id: $id) {
+      name
+      description
+      jobs {
+        id
+        title
+      }
+    }
+  }
+`;
+
 export async function createJob(input) {
   const mutation = gql`
     mutation CreateJobMutation($input: CreateJobInput!) {
